@@ -1,0 +1,9 @@
+data:
+  source_dir: data/amazon_reviews_multi
+  benchmark_dir: data/amazon_reviews_benchmark
+  languages: [en, fr, zh]
+  seed: 20261021
+  split_sizes:
+    train: 600
+    validation: 200
+    test: 500

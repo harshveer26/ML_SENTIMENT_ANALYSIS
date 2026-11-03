@@ -1,0 +1,93 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{A Reproducible Multilingual Sentiment Analysis Pipeline for Amazon Reviews}
+\author{Project Rebuild}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report describes an engineering rebuild of a three-class sentiment pipeline for English,
+French, and Chinese Amazon reviews. The code supports a frozen-encoder probe, full multilingual
+transformer fine-tuning, LoRA, inference, and guarded test evaluation. Software behavior is
+tested with small randomly initialized models. Real model experiments on the separate GPU
+machine have not yet run; new benchmark results therefore remain pending.
+\end{abstract}
+
+\section{Introduction}
+The goal is a reproducible sentiment-analysis workflow with explicit split isolation and honest
+reporting of the Neutral-class failure observed in an earlier project. The primary model family
+is mDeBERTa-v3-base, with XLM-RoBERTa as an alternative. This is a research prototype, not a
+production service.
+
+\section{Data and Protocol}
+The benchmark uses Amazon Reviews Multi for English, French, and Chinese. Stars map to
+Negative (0), Neutral (1), or Positive (2): ratings 0--1 are Negative, rating 2 is Neutral,
+and ratings 3--4 are Positive. The manifest records a fixed sampling seed and separate
+train, validation, and test files. Validation selects checkpoints; the CLI locks test
+evaluation until selection is complete. The current manifest contains 1,800 training,
+600 validation, and 1,500 test examples. Data hashes and split-overlap checks are recorded
+in the manifest.
+
+\section{Methods}
+\subsection{Pipeline}
+The pipeline normalizes source data, samples and validates the benchmark, tokenizes with
+dynamic padding and optional language tags, checks finite values, stores manifests, and
+supports single and batch inference.
+\subsection{Frozen probe}
+The frozen encoder caches CLS features by split and hash. A classification head is selected
+using validation macro-F1; test features do not participate in selection.
+\subsection{Full fine-tuning}
+The mDeBERTa sequence classifier uses AdamW, gradient accumulation, finite-safe mixed precision,
+and validation-based checkpoint selection. Training on the GPU laptop is \textbf{PENDING}.
+\subsection{LoRA}
+LoRA is an optional parameter-efficient variant with configurable target modules. No real LoRA
+benchmark run has been performed.
+
+\section{Results}
+\subsection{Recorded earlier-project result (not reproduced here)}
+The earlier frozen-probe result recorded accuracy 0.4167, macro-F1 0.3060, and majority
+accuracy 0.4060. Negative precision/recall/F1 were 0.415/0.629/0.500; Neutral
+precision/recall/F1 were all 0.000; Positive precision/recall/F1 were
+0.419/0.417/0.418. It never predicted Neutral. These are historical reference values,
+not measurements from this rebuild.
+
+\subsection{New results from this rebuild}
+No real classifier run has been completed in this workspace. Final test evaluations and
+comparisons are \textbf{PENDING} on the GPU laptop. The following table is generated from
+\texttt{reports/results/comparison.json} and remains pending when no comparison exists.
+
+\begin{table}[ht]
+\centering
+\caption{New rebuild evaluations; pending until real runs are returned.}
+\input{generated_tables.tex}
+\end{table}
+
+\subsection{Not evaluated or excluded}
+Arabic and Italian examples are not part of the benchmark. The five-example causal-LM QLoRA
+experiment is isolated and not comparable to the classifier. Invalid checkpoints are excluded
+from reported metrics and predictions.
+
+\section{Neutral-Class Failure Analysis}
+The recorded earlier probe had zero Neutral recall because it never predicted that class.
+Whether a new checkpoint improves Neutral recall is unknown until it is evaluated on the same
+current benchmark manifest; comparison code computes this outcome from returned test metrics.
+
+\section{Limitations}
+Only three languages are benchmarked. The recorded earlier split differs from this rebuild's
+sampled records. Tiny random-model smoke tests establish code-path behavior, not model quality.
+Attention weights are diagnostic and are not causal explanations. The demo does not provide
+production reliability or calibration guarantees.
+
+\section{Reproducibility}
+The repository records data provenance, assumptions, configs, environment information, run
+manifests, and a GPU runbook. Test access is locked until validation-based checkpoint selection
+is complete. The complete suite runs with \texttt{pytest -q}; network and heavy tests are opt-in.
+
+\section{Conclusion}
+The rebuild provides a tested pipeline and demo while keeping new model-quality claims pending.
+The next step is to run the documented GPU workflow, return the run bundle, and compare models
+on the same manifest with explicit Neutral-recall reporting.
+
+\end{document}

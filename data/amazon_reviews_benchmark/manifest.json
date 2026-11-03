@@ -1,0 +1,143 @@
+{
+  "dataset": "mteb/amazon_reviews_multi",
+  "dataset_revision": "c379a6705fec24a2493fa68e011692605f44e119",
+  "seed": 20261021,
+  "languages": [
+    "en",
+    "fr",
+    "zh"
+  ],
+  "split_sizes_per_language": {
+    "train": 600,
+    "validation": 200,
+    "test": 500
+  },
+  "split_counts": {
+    "train": 1800,
+    "validation": 600,
+    "test": 1500
+  },
+  "sampling_salts_crc32": {
+    "en": {
+      "test": 1689703201,
+      "validation": 3794317401,
+      "train": 419787131
+    },
+    "fr": {
+      "test": 558500700,
+      "validation": 1458601194,
+      "train": 938770466
+    },
+    "zh": {
+      "test": 595188763,
+      "validation": 2657248854,
+      "train": 3746457542
+    }
+  },
+  "eligible_candidate_counts": {
+    "en": {
+      "test": 5000,
+      "validation": 5000,
+      "train": 200000
+    },
+    "fr": {
+      "test": 5000,
+      "validation": 4999,
+      "train": 199981
+    },
+    "zh": {
+      "test": 5000,
+      "validation": 5000,
+      "train": 199967
+    }
+  },
+  "label_mapping": {
+    "0": 0,
+    "1": 0,
+    "2": 1,
+    "3": 2,
+    "4": 2
+  },
+  "label_names": {
+    "0": "Negative",
+    "1": "Neutral",
+    "2": "Positive"
+  },
+  "class_counts": {
+    "train": {
+      "en": {
+        "0": 240,
+        "1": 124,
+        "2": 236
+      },
+      "fr": {
+        "0": 215,
+        "1": 136,
+        "2": 249
+      },
+      "zh": {
+        "0": 258,
+        "1": 103,
+        "2": 239
+      }
+    },
+    "validation": {
+      "en": {
+        "0": 73,
+        "1": 46,
+        "2": 81
+      },
+      "fr": {
+        "0": 93,
+        "1": 37,
+        "2": 70
+      },
+      "zh": {
+        "0": 87,
+        "1": 35,
+        "2": 78
+      }
+    },
+    "test": {
+      "en": {
+        "0": 201,
+        "1": 95,
+        "2": 204
+      },
+      "fr": {
+        "0": 197,
+        "1": 105,
+        "2": 198
+      },
+      "zh": {
+        "0": 212,
+        "1": 106,
+        "2": 182
+      }
+    }
+  },
+  "files": {
+    "train.jsonl": "7a412f281aaa7d514c2b9fb202b48f1987c021c04e5f4f23985b1c874f6fb96d",
+    "validation.jsonl": "fd9df8ed1bd509d7f6d0ded3b67e6027b64ebcf8fec23e3a8fcfa9ced04205b4",
+    "test.jsonl": "f9c2d7f2dab5baa52bebb74e1734974365f9593dbbf388cb947830c7609647d8"
+  },
+  "sampling_algorithm": "Reservoir sampling per language/split; exact-text strip() duplicates across splits excluded in priority order test, validation, train; output shuffled by seeded RNG.",
+  "majority_baseline": {
+    "training_majority_label": 2,
+    "training_majority_name": "Positive",
+    "test_accuracy": 0.3893333333333333
+  },
+  "prepared_at_utc": "2026-11-03T09:01:10.397384+00:00",
+  "library_versions": {
+    "python": "3.13.7",
+    "os": "Windows-11-10.0.26200-SP0",
+    "torch": "2.14.1+cpu",
+    "transformers": "5.20.2",
+    "datasets": "5.1.0",
+    "peft": "0.21.2",
+    "cuda_available": false,
+    "cuda_version": null,
+    "gpus": [],
+    "git_commit": null
+  }
+}

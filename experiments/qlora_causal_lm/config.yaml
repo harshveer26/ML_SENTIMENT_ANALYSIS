@@ -1,0 +1,8 @@
+base_model: distilgpt2
+lora_target_modules:
+  - c_attn
+use_4bit: false
+output_dir: experiments/qlora_causal_lm/outputs
+max_length: 96
+learning_rate: 0.0002
+seed: 17

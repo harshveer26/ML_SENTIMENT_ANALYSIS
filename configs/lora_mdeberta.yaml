@@ -1,0 +1,27 @@
+data:
+  source_dir: data/amazon_reviews_multi
+  benchmark_dir: data/amazon_reviews_benchmark
+  languages: [en, fr, zh]
+model:
+  name: mdeberta
+  num_labels: 3
+  max_length: 128
+  use_lang_tag: true
+  peft: lora
+  lora_target_modules: [query_proj, value_proj]
+  lora_rank: 8
+  lora_alpha: 16
+  lora_dropout: 0.1
+train:
+  seed: 42
+  learning_rate: 0.00002
+  weight_decay: 0.01
+  batch_size: 16
+  epochs: 5
+  warmup_ratio: 0.1
+  gradient_accumulation_steps: 1
+  max_grad_norm: 1.0
+  early_stopping_patience: 2
+  mixed_precision: auto
+  class_weights: "off"
+output_dir: runs

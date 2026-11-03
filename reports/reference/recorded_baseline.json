@@ -1,0 +1,20 @@
+{
+  "source": "recorded from earlier project; not reproduced in this workspace",
+  "experiment": "frozen-encoder mDeBERTa probe",
+  "test_examples": 1500,
+  "accuracy": 0.4167,
+  "macro_f1": 0.3060,
+  "majority_class_accuracy": 0.4060,
+  "accuracy_gain_over_majority": 0.0107,
+  "per_class": {
+    "Negative": {"support": 609, "precision": 0.415, "recall": 0.629, "f1": 0.500},
+    "Neutral": {"support": 310, "precision": 0.000, "recall": 0.000, "f1": 0.000},
+    "Positive": {"support": 581, "precision": 0.419, "recall": 0.417, "f1": 0.418}
+  },
+  "per_language_accuracy": {"en": 0.406, "fr": 0.410, "zh": 0.434},
+  "neutral_predicted_count": 0,
+  "notes": [
+    "Major failure: the model never predicted Neutral.",
+    "Historical result only; the current workspace has not reproduced it."
+  ]
+}

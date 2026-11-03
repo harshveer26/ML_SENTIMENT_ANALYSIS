@@ -1,0 +1,7 @@
+[
+  {"language": "en", "text": "The product arrived quickly and works exactly as expected."},
+  {"language": "fr", "text": "Très bon produit, je suis satisfait de mon achat."},
+  {"language": "zh", "text": "质量很好，发货也很快。"},
+  {"language": "ar", "text": "المنتج جيد ويعمل كما هو متوقع。", "note": "Not evaluated on this benchmark."},
+  {"language": "it", "text": "Il prodotto è arrivato in ritardo e non funziona bene.", "note": "Not evaluated on this benchmark."}
+]

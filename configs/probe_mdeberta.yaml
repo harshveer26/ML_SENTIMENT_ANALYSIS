@@ -1,0 +1,15 @@
+data:
+  benchmark_dir: data/amazon_reviews_benchmark
+  languages: [en, fr, zh]
+model:
+  name: mdeberta
+  max_length: 128
+  num_labels: 3
+  use_lang_tag: true
+train:
+  seed: 42
+  learning_rate: 0.001
+  weight_decay: 0.01
+  batch_size: 128
+  epochs: 15
+  early_stopping_patience: 3
